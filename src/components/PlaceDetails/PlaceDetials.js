@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text, Button, Image, Modal,StyleSheet } from "react-native";
+import { View, Text, Button, Image, Modal, StyleSheet, TouchableOpacity } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
 
 const PlaceDetials = props => {
     let content = null;
@@ -16,7 +17,12 @@ const PlaceDetials = props => {
             <View style={styles.modelContainer}>
                 {content}
                 <View>
-                    <Button onPress={props.deleteHandler} title="Delete" color='red' />
+                    <TouchableOpacity onPress={props.deleteHandler}>
+                        <View style={styles.deleteButton}>
+                            <Icon name="ios-trash" size={30} color="red" />
+                        </View>
+                    </TouchableOpacity>
+                    {/* <Button onPress={props.deleteHandler} title="Delete" color='red' /> */}
                     <Button onPress={props.closeHandler} title="Close" />
                 </View>
             </View>
@@ -24,17 +30,20 @@ const PlaceDetials = props => {
     );
 }
 let styles = StyleSheet.create({
-    modelContainer:{
-       margin:22
+    modelContainer: {
+        margin: 22
     },
-    placeImage:{
-        width:"100%",
-        height:200
+    placeImage: {
+        width: "100%",
+        height: 200
     },
-    placeName:{
-        fontWeight:'bold',
-        textAlign:'center',
-        fontSize:28
+    placeName: {
+        fontWeight: 'bold',
+        textAlign: 'center',
+        fontSize: 28
+    },
+    deleteButton: {
+        alignItems: 'center'
     }
 })
 export default PlaceDetials;
