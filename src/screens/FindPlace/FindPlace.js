@@ -1,13 +1,20 @@
 import React from "react";
-import {View,Text} from "react-native";
+import { View, Text } from "react-native";
+import PlaceList from "../../components/PlaceList/PlaceList";
+import { connect } from "react-redux";
 
-class FindPlace extends React.Component{
-    render(){
-        return(
+class FindPlace extends React.Component {
+    render() {
+        return (
             <View>
-                <Text> Find Place </Text>
+                <PlaceList places={this.props.places} />
             </View>
         )
     }
 }
-export default FindPlace;
+const mapStateToProps = state => {
+    return {
+        places: state.places.places
+    }
+}
+export default connect(mapStateToProps)(FindPlace);
