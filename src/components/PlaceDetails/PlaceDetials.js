@@ -1,33 +1,34 @@
 import React from "react";
 import { View, Text, Button, Image, Modal, StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import {connect} from 'react-redux';
+import {deletePlace} from "../../store/actions/index";
 
-const PlaceDetials = props => {
-    let content = null;
-    if (props.selectedPlace !== null) {
-        content = (
-            <View>
-                <Image style={styles.placeImage} source={props.selectedPlace.image} />
-                <Text style={styles.placeName} >{props.selectedPlace.name}</Text>
-            </View>
-        );
+class PlaceDetials extends React.Component {
+    deleteHandler=()=>{
+        this.props.onItemDeleted(this.props.selectedPlace.key);
+        this.props.navigator.pop();
     }
-    return (
-        <Modal onRequestClose={props.closeHandler} visible={props.selectedPlace !== null} animationType="slide" >
-            <View style={styles.modelContainer}>
-                {content}
+    render() {
+        return (
+            <View>
                 <View>
-                    <TouchableOpacity onPress={props.deleteHandler}>
+                    <Image style={styles.placeImage} source={this.props.selectedPlace.image} />
+                    <Text style={styles.placeName} >{this.props.selectedPlace.name}</Text>
+                </View>
+                <View>
+                    <TouchableOpacity onPress={this.deleteHandler}>
                         <View style={styles.deleteButton}>
                             <Icon name="ios-trash" size={30} color="red" />
                         </View>
                     </TouchableOpacity>
                     {/* <Button onPress={props.deleteHandler} title="Delete" color='red' /> */}
-                    <Button onPress={props.closeHandler} title="Close" />
+                    {/*<Button onPress={props.closeHandler} title="Close" />*/}
                 </View>
             </View>
-        </Modal>
-    );
+
+        );
+    }
 }
 let styles = StyleSheet.create({
     modelContainer: {
@@ -46,4 +47,10 @@ let styles = StyleSheet.create({
         alignItems: 'center'
     }
 })
-export default PlaceDetials;
+let mapToDispatch = (dispatch)=>{
+    return {
+        onItemDeleted: (key)=> dispatch(deletePlace(key))
+    }
+}
+
+export default connect(null,mapToDispatch)(PlaceDetials);

@@ -121,6 +121,7 @@ import { Navigation } from "react-native-navigation";
 import AuthScreen from "./src/screens/Auth/Auth";
 import FindPlace from "./src/screens/FindPlace/FindPlace";
 import SharePlace from "./src/screens/SharePlace/SharePlace";
+import PlaceDetails from "./src/components/PlaceDetails/PlaceDetials";
 
 import {Provider} from 'react-redux';
 import configureStore from "./src/store/configureStore";
@@ -130,7 +131,7 @@ const store = configureStore();
 Navigation.registerComponent("awesome-places.AuthScreen", () => AuthScreen,store,Provider);
 Navigation.registerComponent("awesome-places.FindPlace", () => FindPlace,store,Provider);
 Navigation.registerComponent("awesome-places.SharePlace", () => SharePlace,store,Provider);
-
+Navigation.registerComponent("awesome-places.placeDetials",()=> PlaceDetails,store,Provider );
 Navigation.startSingleScreenApp({
   screen: {
     screen: "awesome-places.AuthScreen",
